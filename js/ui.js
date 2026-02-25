@@ -2,40 +2,40 @@ import api from "./api.js"
 
 const ui = {
     async renderizarPensamentos() {
-        const listapensamantos = document.getElementById('lista-pensamentos')
+        const listaPensamentos = document.getElementById("lista-pensamentos")
 
-        try{
+        try {
             const pensamentos = await api.buscarPensamentos()
-            pensamentos.forEach(ui.adicionarPensamentoNaLista);
+            pensamentos.forEach(ui.adicionarPensamentoNaLista)
         }
         catch {
-            alert('Erro ao renderizar pensamento')
+            alert('Erro ao renderizar pensamentos')
         }
     },
-
+    
     adicionarPensamentoNaLista(pensamento) {
-        const listapensamantos = document.getElementById('lista-pensamentos')
-        const li = document.createElement('li')
-        li.setAttribute('data-id', pensamento.id)
-        li.classList.add('li-pensamento')
+        const listaPensamentos = document.getElementById("lista-pensamentos")
+        const li = document.createElement("li")
+        li.setAttribute("data-id", pensamento.id)
+        li.classList.add("li-pensamento")
 
-        const iconeAspas = document.createElement('img')
-        iconeAspas.src = 'assets/imagens/aspas-azuis.png'
-        iconeAspas.alt = 'Aspas azuis'
-        iconeAspas.classList.add('icone-aspas')
+        const iconeAspas = document.createElement("img")
+        iconeAspas.src = "assets/imagens/aspas-azuis.png"
+        iconeAspas.alt = "Aspas azuis"
+        iconeAspas.classList.add("icone-aspas")
 
-        const pensamentoConteudo = document.createElement('div')
+        const pensamentoConteudo = document.createElement("div")
         pensamentoConteudo.textContent = pensamento.conteudo
-        pensamentoConteudo.classList.add('pensamento-contudo')
+        pensamentoConteudo.classList.add("pensamento-conteudo")
 
-        const pensamentoAutoria = document.createElement('div')
+        const pensamentoAutoria = document.createElement("div")
         pensamentoAutoria.textContent = pensamento.autoria
-        pensamentoConteudo.classList.add('pensamento-autoria')
+        pensamentoAutoria.classList.add("pensamento-autoria")
 
         li.appendChild(iconeAspas)
         li.appendChild(pensamentoConteudo)
         li.appendChild(pensamentoAutoria)
-        listapensamantos.appendChild(li)
+        listaPensamentos.appendChild(li)
     }
 }
 
