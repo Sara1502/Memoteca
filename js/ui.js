@@ -67,7 +67,7 @@ const ui = {
     iconeEditar.alt = 'Editar'
     botaoEditar.appendChild(iconeEditar)
 
-        const botaoExcluir = document.createElement("button")
+    const botaoExcluir = document.createElement("button")
     botaoExcluir.classList.add("botao-excluir")
     botaoExcluir.onclick = async () => {
       try {
@@ -83,8 +83,17 @@ const ui = {
     iconeExcluir.alt = "Excluir"
     botaoExcluir.appendChild(iconeExcluir)
 
+    const botaoFavorito = document.createElement('button')
+    botaoFavorito.classList.add('botao-favorito')
+
+    const iconeFavorito = document.createElement('img')
+    iconeFavorito.src = "assets/imagens/icone-favorito_outline.png"
+    iconeFavorito.alt = 'Icone de favorito'
+    botaoFavorito.appendChild(iconeFavorito)
+
     const icones = document.createElement("div")
     icones.classList.add("icones")
+    icones.appendChild(botaoFavorito)
     icones.appendChild(botaoEditar)
     icones.appendChild(botaoExcluir)
 
