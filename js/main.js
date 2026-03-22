@@ -1,6 +1,10 @@
 import ui from "./ui.js"
 import api from "./api.js"
 
+function removerEspacos(string) {
+  return string.replaceAll(/\s+/g, '')
+}
+
 const regexConteudo = /^[A-Za-z\s]{10,}$/
 
 function validarConteudo(conteudo) {
@@ -26,7 +30,9 @@ async function manipularSubmissaoFormulario(event) {
   const autoria = document.getElementById("pensamento-autoria").value
   const data =document.getElementById('pensamento-data').value
 
-  if (!validarConteudo(conteudo)) {
+  const conteudoSemEspacos = removerEspacos(conteudo)
+
+  if (!validarConteudo(conteudoSemEspacos)) {
     alert('Minimo de 10 caracteres')
     return
   }
