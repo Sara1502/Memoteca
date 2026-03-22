@@ -1,6 +1,20 @@
 import ui from "./ui.js"
 import api from "./api.js"
 
+const pensamentosSet = new Set()
+
+async function adicionarChaveAoPensamento() {
+  try {
+    const pensamentos = await api.buscarPensamentos()
+    pensamentos.forEach(pensamento => {
+      const chavePnesamento = `${pensamento.conteudo.trim().toLowerCase()}-${pensamento.autoria.trim().toLowerCase()}`
+      pensamentosSet.add(chavePnesamento)
+    })
+  } catch (error) {
+    alert('Erro ao adicionar pensamento')
+  }
+}
+
 function removerEspacos(string) {
   return string.replaceAll(/\s+/g, '')
 }
@@ -13,6 +27,7 @@ function validarConteudo(conteudo) {
 
 document.addEventListener("DOMContentLoaded", () => {
   ui.renderizarPensamentos()
+  adicionarChaveAoPensamento()
 
   const formularioPensamento = document.getElementById("pensamento-form")
   const botaoCancelar = document.getElementById("botao-cancelar")
@@ -39,6 +54,13 @@ async function manipularSubmissaoFormulario(event) {
 
   if(!validardata(data)){
     alert('Não é permitido cadastro de datas futuras')
+  }
+
+  const chaveNovoPensamento = `${conteudo.trim().toLowerCase()}-${autoria.trim().toLowerCase()}`
+
+  if(pensamentosSet.has(chaveNovoPensamento)) {
+    alert('Esse pensamento já existe')
+    return
   }
 
   try{ 
